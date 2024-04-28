@@ -1,0 +1,6 @@
+@PeopleMinimalAPI_HostAddress = http://localhost:5195
+
+GET {{PeopleMinimalAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
