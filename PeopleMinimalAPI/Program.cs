@@ -240,10 +240,10 @@ namespace PeopleMinimalAPI
             ////////////                  Connected                   //////////////
             ///////////////////////////////////////////////////////////////////////
 
-
-            app.MapGet("/peopleWithInterestsAndLinks",  (ApplicationDbContext context) =>
+            // get all persons with interests and links
+            app.MapGet("/peopleWithInterestsAndLinks", async (ApplicationDbContext context) =>
             {
-                var results =  Task.Run(() =>
+                var results = await Task.Run(() =>
                 {
                     return from person in context.People
                            select new
@@ -279,11 +279,11 @@ namespace PeopleMinimalAPI
             });
 
 
-            // Get an person by Id
-            app.MapGet("/personWithInterests/{id:int}", (int id, ApplicationDbContext context) =>
+            // Get an person with interests
+            app.MapGet("/personWithInterests/{id:int}", async (int id, ApplicationDbContext context) =>
             {
 
-                var people = Task.Run(() =>
+                var people = await Task.Run(() =>
                 {
                     return from person in context.People
                            where person.PersonId == id
@@ -311,10 +311,12 @@ namespace PeopleMinimalAPI
                 return Results.Ok(people);
             });
 
-            app.MapGet("/personWithLinks/{id:int}", (int id, ApplicationDbContext context) =>
+
+            // Get a person with links
+            app.MapGet("/personWithLinks/{id:int}",async (int id, ApplicationDbContext context) =>
             {
 
-                var people = Task.Run(() =>
+                var people = await Task.Run(() =>
                 {
                     return from person in context.People
                            where person.PersonId == id
